@@ -2,16 +2,7 @@
 // https://gist.github.com/Klerith/3949f1c8b884d7101e378dfb668f0f3a
 
 import Link from "next/link";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet"
+
 import SheetPage from "./sheet/page";
 
 const links = [
@@ -39,7 +30,8 @@ export default function DashboardLayout({
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start">
               <div className="lg:hidden mx-4">
-                <SheetPage children={
+                <SheetPage>
+                  <>
                     <div className="relative flex-1 flex flex-col min-h-0 borderR border-gray-200 bg-white pt-0">
                     <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
                       <div className="flex-1 px-3 bg-white divide-y space-y-1">
@@ -58,7 +50,8 @@ export default function DashboardLayout({
                       </div>
                     </div>
                   </div>
-                } />
+                  </>
+                </SheetPage>
               </div>
                 
                 
