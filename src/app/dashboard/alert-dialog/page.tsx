@@ -14,7 +14,7 @@ import {
   import { Button } from "@/components/ui/button"
 import { useState } from "react"
 
-export default function page() {
+export default function AlertPage() {
     const [dialagoOpen, setDialagoOpen] = useState(false)
     
     

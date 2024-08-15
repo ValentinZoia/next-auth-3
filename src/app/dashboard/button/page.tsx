@@ -54,7 +54,7 @@ function GoogleIcon() {
 
 
 
-export default function page() {
+export default function ButtonPage() {
   const [send, setSend] = useState(false)
   return (
     <div className="grid gap-3 w-6">

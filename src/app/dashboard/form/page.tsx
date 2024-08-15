@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -15,11 +14,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Input } from "@/components/ui/input";
+import { Input, InputPassword } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import GoogleIcon from "@/lib/GoogleIcon";
 import Link from "next/link";
+
 
 const exampleFormSchema = z.object({
   username: z
@@ -34,9 +34,10 @@ const exampleFormSchema = z.object({
 });
 
 const SignupFormSchema = z.object({
-  email: z.string().email({message: "Please enter a valid email address"}).trim(),
+  email: z.string().min(1, { message: 'Email field must not be empty.' }).email({ message: 'Please enter a valid email.' }).trim(),
   password: z
     .string()
+    .min(1, { message: 'Password field must not be empty.' })
     .min(8,{message:'Be at least 8 characters long'})
     .regex(/[a-zA-Z]/, { message: 'Contain at least one letter.' })
     .regex(/[0-9]/, { message: 'Contain at least one number.' })
@@ -49,7 +50,7 @@ const SignupFormSchema = z.object({
 });
 
 const LoginFormSchema = z.object({
-  email: z.string().email({ message: 'Please enter a valid email.' }),
+  email: z.string().min(1, { message: 'Email field must not be empty.' }).email({ message: 'Please enter a valid email.' }).trim(),
   password: z.string().min(1, { message: 'Password field must not be empty.' }),
   
 });
@@ -59,6 +60,10 @@ const LoginFormSchema = z.object({
 
 
 export default function FormPage() {
+  
+
+
+
   // 1. Define your form.
   const exampleForm = useForm<z.infer<typeof exampleFormSchema>>({
     resolver: zodResolver(exampleFormSchema),
@@ -252,10 +257,10 @@ export default function FormPage() {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input type="password" {...field} />
+                <InputPassword type="password" {...field} />
                 </FormControl>
-                <Link href={"/dashboard/form"}><p className="mt-2 text-sm text-right col-end-2 text-blue-500">Forgot Password?</p> </Link>
                 <FormMessage />
+                <Link href={"/dashboard/form"}><p className="mt-2 text-sm text-right col-end-2 text-blue-500">Forgot Password?</p> </Link>
               </FormItem>
             )}
           />
@@ -281,7 +286,7 @@ export default function FormPage() {
           <Button  variant="outline" type="button">
             <GoogleIcon /> Continue with Google
           </Button>
-          <p className="text-sm text-center text-gray-400">Dont have an account yet? <Link href={"/dashboard/form"} className="text-blue-500 font-bold">Sign Up</Link></p>
+          <p className="text-sm text-center  text-gray-400">Dont have an account yet? <Link href={"/dashboard/form"} className="text-blue-500 font-bold">Sign Up</Link></p>
         </form>
       </Form>
 
@@ -301,7 +306,7 @@ export default function FormPage() {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input type="email" {...field} />
+                  <Input type="email" {...field}/>
                 </FormControl>
 
                 <FormMessage />
@@ -317,8 +322,10 @@ export default function FormPage() {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input type="password" {...field} />
+                  {/* <Input type="password" {...field} /> */}
+                  <InputPassword type="password" {...field} />
                 </FormControl>
+                
                 <FormMessage />
               </FormItem>
             )}
@@ -332,7 +339,7 @@ export default function FormPage() {
               <FormItem>
                 <FormLabel>Confirm Password</FormLabel>
                 <FormControl>
-                  <Input type="password" {...field} />
+                <InputPassword type="password" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -344,10 +351,13 @@ export default function FormPage() {
             Sign Up
           </Button>
 
-           
+          
+          
           <p className="text-sm text-center text-gray-400">Already have an account? <Link href={"/dashboard/form"} className="text-blue-500 font-bold">Log In</Link></p>
         </form>
       </Form>
+
+      
     </div>
   );
 }
