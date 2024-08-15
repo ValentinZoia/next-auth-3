@@ -10,6 +10,7 @@ const links = [
   { name: 'alert dialog', href: 'alert-dialog' },
   { name: 'dialog', href: 'dialog' },
   { name: 'toast', href: 'toast' },
+  { name: "form", href: "form" },
 
 ];
 
