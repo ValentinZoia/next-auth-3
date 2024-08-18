@@ -1,9 +1,15 @@
+"use client";
 // https://tailwindcomponents.com/component/tailwind-css-admin-dashboard-layout
 // https://gist.github.com/Klerith/3949f1c8b884d7101e378dfb668f0f3a
 
 import Link from "next/link";
 
 import SheetPage from "./sheet/page";
+import { SheetClose } from "@/components/ui/sheet";
+
+import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
+import { ModeToggle } from "@/components/ui/theme-toggle";
 
 const links = [
   { name: "accordion", href: "accordion" },
@@ -14,6 +20,10 @@ const links = [
   { name: 'toast', href: 'toast' },
   { name: 'input', href: 'input' },
   { name: "form", href: "form" },
+  { name: "form-1", href: "form-1" },
+  { name: "form-2", href: "form-2" },
+  { name: "form-3", href: "form-3" },
+  { name: "form-4", href: "form-4" },
   { name: "sheet", href: "sheet" },
 
 ];
@@ -23,27 +33,41 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null; // Esto asegura que el tema se aplique correctamente solo después de que el componente esté montado.
+
+
+
   return (
     <>
-      <nav className="bg-white border-b border-gray-200 fixed z-30 w-full">
+      <nav className="bg-background border-b border-secondary fixed z-30 w-full ">
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start">
               <div className="lg:hidden mx-4">
                 <SheetPage>
                   <>
-                    <div className="relative flex-1 flex flex-col min-h-0 borderR border-gray-200 bg-white pt-0">
+                    <div className="relative flex-1 flex flex-col min-h-0 borderR border-secondary bg-background pt-0">
                     <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-                      <div className="flex-1 px-3 bg-white divide-y space-y-1">
+                      <div className="flex-1 px-3 bg-background divide-y space-y-1">
                         <ul className="space-y-2 pb-2">
                           {links.map((link) => (
                             <li key={link.href}>
-                              <Link
+                              <SheetClose asChild>
+                                <Link
                                 href={link.href}
-                                className="text-base capitalize text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group"
+                                className="text-base capitalize text-primary font-normal rounded-lg flex items-center p-2 hover:bg-secondary group"
                               >
                                 <span className="ml-3">{link.name}</span>
                               </Link>
+                              </SheetClose>
+                              
                             </li>
                           ))}
                         </ul>
@@ -96,7 +120,11 @@ export default function DashboardLayout({
                 </span>
               </a>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center space-x-4">
+
+              {/* Dark Mode Switch */}
+              <ModeToggle />
+            
               {/* User Avatar */}
               <div className="bg-blue-500 text-white p-2 rounded-full w-12 h-12 flex items-center justify-center">
                 FH
@@ -105,21 +133,21 @@ export default function DashboardLayout({
           </div>
         </div>
       </nav>
-      <div className="flex overflow-hidden bg-white pt-16">
+      <div className="flex overflow-hidden bg-background pt-16">
         <aside
           id="sidebar"
           className="fixed hidden z-20 h-full top-0 left-0 pt-16 lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75"
           aria-label="Sidebar"
         >
-          <div className="relative flex-1 flex flex-col min-h-0 borderR border-gray-200 bg-white pt-0">
+          <div className="relative flex-1 flex flex-col min-h-0 borderR border-secondary bg-background pt-0">
             <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-              <div className="flex-1 px-3 bg-white divide-y space-y-1">
+              <div className="flex-1 px-3 bg-background divide-y space-y-1">
                 <ul className="space-y-2 pb-2">
                   {links.map((link) => (
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="text-base capitalize text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group"
+                        className="text-base capitalize text-primary font-normal rounded-lg flex items-center p-2 hover:bg-secondary group"
                       >
                         <span className="ml-3">{link.name}</span>
                       </Link>
@@ -131,17 +159,17 @@ export default function DashboardLayout({
           </div>
         </aside>
         <div
-          className="bg-gray-900 opacity-50 hidden fixed inset-0 z-10"
+          className="bg-secondary opacity-50 hidden fixed inset-0 z-10"
           id="sidebarBackdrop"
         ></div>
         <div
           id="main-content"
-          className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64"
+          className="h-full w-full bg-secondary relative overflow-y-auto lg:ml-64"
         >
           <main>
             <div className="pt-6 px-4">
               <div className="w-full min-h-[calc(100vh-230px)]">
-                <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8">
+                <div className="bg-background shadow rounded-lg p-4 sm:p-6 xl:p-8">
                   {children}
                 </div>
               </div>

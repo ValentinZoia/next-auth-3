@@ -228,11 +228,13 @@ export default function FormPage() {
 
 
       {/* LOGIN FORM - GITHUB - GOOGLE */}
+      
       <Form {...loginForm}>
         <form
           onSubmit={loginForm.handleSubmit(onSubmit2)}
           className="w-full sm:w-1/2  border-solid border-2 border-indigo-600 grid gap-4 p-4"
         >
+          
           {/* Email*/}
           <FormField
             control={loginForm.control}
@@ -279,12 +281,12 @@ export default function FormPage() {
 
             {/*Github Login Button*/}
           <Button variant="outline" type="button">
-            <GitHubLogoIcon  className="mr-2 h-5 w-5" /> Continue with Github
+            <GitHubLogoIcon  className="mr-2 h-5 w-5" /> Log in with Github
           </Button>
 
             {/*Google Login Button*/}
           <Button  variant="outline" type="button">
-            <GoogleIcon /> Continue with Google
+            <GoogleIcon /> Log in with Google
           </Button>
           <p className="text-sm text-center  text-gray-400">Dont have an account yet? <Link href={"/dashboard/form"} className="text-blue-500 font-bold">Sign Up</Link></p>
         </form>
@@ -339,7 +341,7 @@ export default function FormPage() {
               <FormItem>
                 <FormLabel>Confirm Password</FormLabel>
                 <FormControl>
-                <InputPassword type="password" {...field} />
+                <InputPassword type="password" autoComplete="off" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -351,11 +353,29 @@ export default function FormPage() {
             Sign Up
           </Button>
 
+            {/* --- or --- */}
+          <div className="flex justify-center items-center gap-2">
+            <hr className="w-1/2 " />
+            <span className="text-sm text-gray-400">OR</span>
+            <hr className="w-1/2" />
+          </div>
+
+            {/*Github Login Button*/}
+          <Button variant="outline" type="button">
+            <GitHubLogoIcon  className="mr-2 h-5 w-5" /> Sign Up with Github
+          </Button>
+
+            {/*Google Login Button*/}
+          <Button  variant="outline" type="button">
+            <GoogleIcon /> Sign Up with Google
+          </Button>
           
           
           <p className="text-sm text-center text-gray-400">Already have an account? <Link href={"/dashboard/form"} className="text-blue-500 font-bold">Log In</Link></p>
         </form>
       </Form>
+
+
 
       
     </div>
