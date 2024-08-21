@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 
 import {
   Sheet,
-  SheetClose,
+  
   SheetContent,
   SheetDescription,
   SheetFooter,
@@ -15,10 +15,10 @@ import {
 
 
   interface SheetPageProps{
-    children: React.ReactNode
+    children: React.ReactNode 
   }
 
-export default function SheetPage({children}: SheetPageProps) {
+ function SheetPage({children}: SheetPageProps) {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -32,6 +32,7 @@ export default function SheetPage({children}: SheetPageProps) {
         
             {children}
         
+        
 
         
         <SheetFooter>
@@ -41,3 +42,5 @@ export default function SheetPage({children}: SheetPageProps) {
     </Sheet>
   )
 }
+
+export default SheetPage
