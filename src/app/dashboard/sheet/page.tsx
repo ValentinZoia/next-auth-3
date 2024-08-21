@@ -14,9 +14,11 @@ import {
  
 
 
- 
+  interface SheetPageProps{
+    children: React.ReactNode
+  }
 
-export default function SheetPage({children}: {children: React.ReactNode}) {
+export default function SheetPage({children}: SheetPageProps) {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -27,9 +29,8 @@ export default function SheetPage({children}: {children: React.ReactNode}) {
           <SheetTitle>LOGO</SheetTitle>
           <SheetDescription></SheetDescription>
         </SheetHeader>
-        <SheetClose asChild>
+        
             {children}
-        </SheetClose>
         
 
         
