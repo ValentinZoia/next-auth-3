@@ -59,14 +59,14 @@ export default function DashboardLayout({
                         <ul className="space-y-2 pb-2">
                           {links.map((link) => (
                             <li key={link.href}>
-                              <SheetClose asChild>
+                              {/* <SheetClose asChild> */}
                                 <Link
                                 href={link.href}
                                 className="text-base capitalize text-primary font-normal rounded-lg flex items-center p-2 hover:bg-secondary group"
                               >
                                 <span className="ml-3">{link.name}</span>
                               </Link>
-                              </SheetClose>
+                              {/* </SheetClose> */}
                               
                             </li>
                           ))}

@@ -14,9 +14,7 @@ import {
  
 
 
-  // interface SheetPageProps{
-  //   children: React.ReactNode
-  // }
+ 
 
 export default function SheetPage({children}: {children: React.ReactNode}) {
   return (
