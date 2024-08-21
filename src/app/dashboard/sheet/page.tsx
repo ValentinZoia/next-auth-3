@@ -14,13 +14,11 @@ import {
  
 
 
-  interface SheetPageProps{
-    children: React.ReactNode
-  }
+  // interface SheetPageProps{
+  //   children: React.ReactNode
+  // }
 
-const SheetPage: React.FC<SheetPageProps> = ({children}) => {
-  
-
+export default function SheetPage({children}: {children: React.ReactNode}) {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -44,6 +42,3 @@ const SheetPage: React.FC<SheetPageProps> = ({children}) => {
     </Sheet>
   )
 }
-
-
-export default SheetPage
