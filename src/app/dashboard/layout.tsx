@@ -14,18 +14,17 @@ import { ModeToggle } from "@/components/ui/theme-toggle";
 const links = [
   { name: "accordion", href: "accordion" },
   { name: "alert", href: "alert" },
-  { name: 'button', href: 'button' },
-  { name: 'alert dialog', href: 'alert-dialog' },
-  { name: 'dialog', href: 'dialog' },
-  { name: 'toast', href: 'toast' },
-  { name: 'input', href: 'input' },
+  { name: "button", href: "button" },
+  { name: "alert dialog", href: "alert-dialog" },
+  { name: "dialog", href: "dialog" },
+  { name: "toast", href: "toast" },
+  { name: "input", href: "input" },
   { name: "form", href: "form" },
   { name: "form-1", href: "form-1" },
   { name: "form-2", href: "form-2" },
   { name: "form-3", href: "form-3" },
   { name: "form-4", href: "form-4" },
   { name: "sheet", href: "sheet" },
-
 ];
 
 export default function DashboardLayout({
@@ -42,8 +41,6 @@ export default function DashboardLayout({
 
   if (!mounted) return null; // Esto asegura que el tema se aplique correctamente solo después de que el componente esté montado.
 
-
-
   return (
     <>
       <nav className="bg-background border-b border-secondary fixed z-30 w-full ">
@@ -51,21 +48,20 @@ export default function DashboardLayout({
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start">
               <div className="lg:hidden mx-4">
-              <SheetPage>
-                  <>
-                    <div className="relative flex-1 flex flex-col min-h-0 borderR border-gray-200 bg-white pt-0">
+                <SheetPage>
+                  <div className="relative flex-1 flex flex-col min-h-0 borderR border-secondary bg-background pt-0">
                     <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-                      <div className="flex-1 px-3 bg-white divide-y space-y-1">
+                      <div className="flex-1 px-3 bg-background divide-y space-y-1">
                         <ul className="space-y-2 pb-2">
                           {links.map((link) => (
                             <li key={link.href}>
                               <SheetClose asChild>
-                              <Link
-                                href={link.href}
-                                className="text-base capitalize text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group"
-                              >
-                                <span className="ml-3">{link.name}</span>
-                              </Link>
+                                <Link
+                                  href={link.href}
+                                  className="text-base capitalize text-primary font-normal rounded-lg flex items-center p-2 hover:bg-secondary group"
+                                >
+                                  <span className="ml-3">{link.name}</span>
+                                </Link>
                               </SheetClose>
                             </li>
                           ))}
@@ -73,12 +69,9 @@ export default function DashboardLayout({
                       </div>
                     </div>
                   </div>
-                  </>
                 </SheetPage>
               </div>
-                
-                
-              
+
               <a
                 href="home"
                 className="text-xl font-bold flex items-center lg:ml-2.5"
@@ -120,10 +113,9 @@ export default function DashboardLayout({
               </a>
             </div>
             <div className="flex items-center space-x-4">
-
               {/* Dark Mode Switch */}
               <ModeToggle />
-            
+
               {/* User Avatar */}
               <div className="bg-blue-500 text-white p-2 rounded-full w-12 h-12 flex items-center justify-center">
                 FH
