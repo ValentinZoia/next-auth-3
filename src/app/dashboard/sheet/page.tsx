@@ -18,7 +18,9 @@ import {
     children: React.ReactNode
   }
 
-export default function SheetPage({children}: SheetPageProps) {
+const SheetPage: React.FC<SheetPageProps> = ({children}) => {
+  
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -42,3 +44,6 @@ export default function SheetPage({children}: SheetPageProps) {
     </Sheet>
   )
 }
+
+
+export default SheetPage
