@@ -52,7 +52,7 @@ export default function DashboardLayout({
             <div className="flex items-center justify-start">
               <div className="lg:hidden mx-4">
                 <SheetPage>
-                  <>
+                  <div>
                     <div className="relative flex-1 flex flex-col min-h-0 borderR border-secondary bg-background pt-0">
                     <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
                       <div className="flex-1 px-3 bg-background divide-y space-y-1">
@@ -74,7 +74,7 @@ export default function DashboardLayout({
                       </div>
                     </div>
                   </div>
-                  </>
+                  </div>
                 </SheetPage>
               </div>
                 
