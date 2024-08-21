@@ -1,5 +1,6 @@
 "use client"
-import { Button } from "@/components/ui/button"
+import { Button} from "@/components/ui/button"
+import { LogoButton} from "@/components/ui/button-logo"
 
 import { EnvelopeOpenIcon, GitHubLogoIcon, ReloadIcon } from "@radix-ui/react-icons"
 import { useState } from "react"
@@ -87,6 +88,9 @@ export default function ButtonPage() {
       ? (<><ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> <p>Sending...</p></>)
       : ( <p>Send!</p>) }
     </Button>
+
+    <LogoButton variant="outline" logo="github"> Login with Github</LogoButton>
+    <LogoButton variant="outline" logo="google"> Login with Google</LogoButton>
 
     
 

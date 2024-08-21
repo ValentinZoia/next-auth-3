@@ -18,8 +18,8 @@ export default function InputPage() {
 
         <InputPassword type="password" placeholder='Password' autoComplete='off'/>
 
-        
-
+        <Input type='password' placeholder='Password' />
+      
 
         <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="picture">Picture</Label>

@@ -2,14 +2,14 @@ export default function GoogleIcon() {
     return (
       <svg
       xmlSpace="preserve"
-      style={{ background: "new 0 0 512 512", marginRight: "10px" }}
+      style={{ background: "new 0 0 512 512", marginRight: "0.5rem" }}
       viewBox="0 0 512 512"
       y="0px"
       x="0px"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       xmlns="http://www.w3.org/2000/svg"
       id="Layer_1"
-      width={20}
+      width={19}
       version="1.1"
     >
       <path
