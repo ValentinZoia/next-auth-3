@@ -26,6 +26,7 @@ export default function SignUpForm() {
         defaultValues: {
           email: "",
           password: "",
+          confirmPassword: "",
           
           
         },

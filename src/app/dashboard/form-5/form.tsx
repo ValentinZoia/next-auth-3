@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,43 +16,53 @@ import {
 import { Input, InputPassword } from "@/components/ui/input";
 import { LogoButton } from "@/components/ui/button-logo";
 import Link from "next/link";
-import { useFormState, useFormStatus } from "react-dom";
-
+import { useFormState } from "react-dom";
 import { signup } from "./action";
 import { toast } from "@/components/ui/use-toast";
 
 type OurSchema = z.infer<typeof SignUpFormSchema>;
 
 export default function SignUpForm() {
-  const [state, action] = useFormState(signup, undefined);
+  const [state, formAction] = useFormState(signup, {
+    message: "",
+  });
 
   const form = useForm<OurSchema>({
     resolver: zodResolver(SignUpFormSchema),
+    mode: "onChange",
     defaultValues: {
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
-  const formRef = useRef<HTMLFormElement | null>(null);
+  
 
-  const openToast = () => {
-    if(state?.message)
-    toast({
-      title: "Success!",
-      description: "Your account has been created.",
-    });
-  };
-
-  openToast();
+  
+   // Mostrar el mensaje en un toast cuando cambie el state.message
+   useEffect(() => {
+    if (state?.message) {
+      toast({
+        title: state.message,
+        variant: "success", // Puedes cambiar el variant si tienes otros estilos
+      });
+      form.reset({
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+    }
+  }, [state?.message]);
+  
   return (
     <Form {...form}>
+      
       <form
-        ref={formRef}
-        action={action}
-        // onSubmit={form.handleSubmit( () => formRef?.current?.requestSubmit())}
+        action={formAction}       
         className="w-full sm:w-1/2  border-solid border-2 border-indigo-600 grid gap-4 p-4"
       >
+        
         
 
         {/* Email*/}
@@ -61,6 +71,7 @@ export default function SignUpForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
+              
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input type="email" {...field} />
@@ -68,8 +79,21 @@ export default function SignUpForm() {
 
               <FormMessage />
               {state?.errors?.email && (
-                <p className="text-red-500 text-sm">{state?.errors?.email}</p>
+                <p className="text-sm text-red-500">{state?.errors?.email[0]}</p>
               )}
+
+              {/* {state?.errors?.email && (
+                <div className="text-sm text-red-500">
+                  <p>Email must:</p>
+                  <ul>
+                    {state.errors.email.map((error) => (
+                      <li key={error}>- {error}</li>
+                    ))}
+                  </ul>
+                </div>
+              )} */}
+
+              
             </FormItem>
           )}
         />
@@ -85,7 +109,12 @@ export default function SignUpForm() {
                 {/* <Input type="password" {...field} /> */}
                 <InputPassword type="password" {...field} />
               </FormControl>
+              <FormMessage />
               {state?.errors?.password && (
+                <p className="text-sm text-red-500">{state?.errors?.password[0]}</p>
+              )}
+
+              {/* {state?.errors?.password && (
                 <div className="text-sm text-red-500">
                   <p>Password must:</p>
                   <ul>
@@ -94,8 +123,8 @@ export default function SignUpForm() {
                     ))}
                   </ul>
                 </div>
-              )}
-              <FormMessage />
+              )} */}
+              
             </FormItem>
           )}
         />
@@ -110,12 +139,13 @@ export default function SignUpForm() {
               <FormControl>
                 <InputPassword type="password" autoComplete="off" {...field} />
               </FormControl>
+              <FormMessage />
               {state?.errors?.confirmPassword && (
                 <p className="text-red-500 text-sm">
                   {state?.errors?.confirmPassword}
                 </p>
               )}
-              <FormMessage />
+              
             </FormItem>
           )}
         />

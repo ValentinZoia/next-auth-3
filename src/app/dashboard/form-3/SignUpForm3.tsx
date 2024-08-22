@@ -30,6 +30,7 @@ export default function SignUpForm({onDataAction}:{onDataAction: (data: OurSchem
         defaultValues: {
           email: "",
           password: "",
+          confirmPassword: "",
           
           
         },

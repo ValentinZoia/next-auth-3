@@ -1,10 +1,7 @@
-"use client"
-import { useFormState } from "react-dom"
-import { useRef } from "react"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { SignUpFormSchema } from "@/app/registrationSchema"
+"use client";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SignUpFormSchema } from "@/app/registrationSchema";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -15,49 +12,55 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input, InputPassword } from "@/components/ui/input";
-import { LogoButton } from "@/components/ui/button-logo"
-import Link from "next/link"
-import { toast } from "@/components/ui/use-toast"
+import { LogoButton } from "@/components/ui/button-logo";
+import Link from "next/link";
+import { useForm} from "react-hook-form";
 
-type OurSchema = z.infer<typeof SignUpFormSchema>
+import { useState } from "react";
 
-export default function SignUpForm({onFormAction}:{onFormAction: (prevState:{
-  message: string;
-  user?: OurSchema;
-  issues?: string[];
-} , data: FormData) => Promise<{
-    message: string;
-    user?: OurSchema;
-    issues?: string[];
-}>}) {
+import { signup } from "./action";
+import { toast } from "@/components/ui/use-toast";
 
-    const [state, formAction] = useFormState(onFormAction,{
-      message: "",
-    })
 
-    const form = useForm<OurSchema>({
-        resolver: zodResolver(SignUpFormSchema),
-        defaultValues: {
-          email: "",
-          password: "",
-          confirmPassword: "",
-          
-          
-        },
+type OurSchema = z.infer<typeof SignUpFormSchema>;
+export default function SignUpForm() {
+  
+
+  const [successMessaje, setSuccessMessage] = useState<string | undefined>("");
+
+  const form = useForm<OurSchema>({
+    resolver: zodResolver(SignUpFormSchema),
+    
+    defaultValues: {
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  async function onSubmit(data: OurSchema) {
+    const formData = new FormData();
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+    formData.append("confirmPassword", data.confirmPassword);
+    const res = await signup(undefined, formData);
+    setSuccessMessage(res?.message);
+    if (res?.message) {
+      toast({ title: res.message, variant: "success" });
+      form.reset({
+        email: "",
+        password: "",
+        confirmPassword: "",
       });
-  
-  
-  
-  
-    const formRef = useRef<HTMLFormElement | null>(null)
+    }
+  }
 
-    return (
-      <Form {...form}>
-        <div className="text-red-700">{state?.message}</div>
+  return (
+    <Form {...form}>
+      
       <form
-        ref={formRef}
-        action={formAction}
-        //onSubmit={form.handleSubmit(formAction)}
+       
+        onSubmit={form.handleSubmit(onSubmit)}
         className="w-full sm:w-1/2  border-solid border-2 border-indigo-600 grid gap-4 p-4"
       >
         {/* Email*/}
@@ -68,7 +71,7 @@ export default function SignUpForm({onFormAction}:{onFormAction: (prevState:{
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="email" {...field}/>
+                <Input type="email" {...field} />
               </FormControl>
 
               <FormMessage />
@@ -84,10 +87,9 @@ export default function SignUpForm({onFormAction}:{onFormAction: (prevState:{
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                {/* <Input type="password" {...field} /> */}
                 <InputPassword type="password" {...field} />
               </FormControl>
-              
+
               <FormMessage />
             </FormItem>
           )}
@@ -101,7 +103,7 @@ export default function SignUpForm({onFormAction}:{onFormAction: (prevState:{
             <FormItem>
               <FormLabel>Confirm Password</FormLabel>
               <FormControl>
-              <InputPassword type="password" autoComplete="off" {...field} />
+                <InputPassword type="password" autoComplete="off" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -113,27 +115,30 @@ export default function SignUpForm({onFormAction}:{onFormAction: (prevState:{
           Sign Up
         </Button>
 
-          {/* --- or --- */}
+        {/* --- or --- */}
         <div className="flex justify-center items-center gap-2">
           <hr className="w-1/2 " />
           <span className="text-sm text-gray-400">OR</span>
           <hr className="w-1/2" />
         </div>
 
-          {/*Github Login Button*/}
+        {/*Github Login Button*/}
         <LogoButton type="button" variant={"outline"} logo={"github"}>
           Sign Up with Github
         </LogoButton>
 
-
-          {/*Google Login Button*/}
+        {/*Google Login Button*/}
         <LogoButton type="button" variant={"outline"} logo={"google"}>
           Sign Up with Google
         </LogoButton>
-        
-        
-        <p className="text-sm text-center text-gray-400">Already have an account? <Link href={"/dashboard/form"} className="text-blue-500 font-bold">Log In</Link></p>
+
+        <p className="text-sm text-center text-gray-400">
+          Already have an account?{" "}
+          <Link href={"/dashboard/form"} className="text-blue-500 font-bold">
+            Log In
+          </Link>
+        </p>
       </form>
     </Form>
-  )
+  );
 }

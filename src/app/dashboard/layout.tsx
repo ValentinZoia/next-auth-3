@@ -25,6 +25,8 @@ const links = [
   { name: "form-3", href: "form-3" },
   { name: "form-4", href: "form-4" },
   { name: "form-5", href: "form-5" },
+  { name: "form-6", href: "form-6" },
+  {name: "form-7", href: "form-7"},
   { name: "sheet", href: "sheet" },
 ];
 

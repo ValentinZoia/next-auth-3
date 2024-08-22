@@ -3,7 +3,7 @@
 import { SignUpFormSchema, FormState } from "@/app/registrationSchema"
 
 
-export async function signup(state:FormState, formData: FormData): Promise<FormState>{
+export async function signup(prevState: FormState, formData: FormData): Promise<FormState>{
        // 1. Validate form fields
        const data = Object.fromEntries(formData)
        const validatedFields = SignUpFormSchema.safeParse(data);
