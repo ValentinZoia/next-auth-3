@@ -46,14 +46,6 @@ export default function SignUpForm({onFormAction}:{onFormAction: (prevState:{
       });
   
   
-  const onSubmit = async (data: OurSchema) => {
-    // const formData = new FormData();
-    // formData.append("email", data.email);
-    // formData.append("password", data.password);
-    // formData.append("confirmPassword", data.confirmPassword);
-
-    // console.log(await onFormAction(formData));
-  }
   
   
     const formRef = useRef<HTMLFormElement | null>(null)
@@ -64,7 +56,7 @@ export default function SignUpForm({onFormAction}:{onFormAction: (prevState:{
       <form
         ref={formRef}
         action={formAction}
-        onSubmit={form.handleSubmit( () => formRef?.current?.requestSubmit())}
+        // onSubmit={form.handleSubmit( () => formRef?.current?.requestSubmit())}
         className="w-full sm:w-1/2  border-solid border-2 border-indigo-600 grid gap-4 p-4"
       >
         {/* Email*/}

@@ -15,3 +15,15 @@ export const SignUpFormSchema =  z.object({
     message: "Passwords don't match",
     path: ["confirmPassword"],
   });
+
+
+  export type FormState =
+  | {
+      errors?: {
+        email?: string[] | undefined;
+        password?: string[] | undefined;
+        confirmPassword?: string[] | undefined;
+      };
+      message?: string | undefined;
+    }
+  | undefined;
